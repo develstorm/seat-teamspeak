@@ -1,1 +1,1 @@
-# seat-teamspeak
+# EVE SeAT Teamspeak integration

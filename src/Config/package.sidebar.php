@@ -22,13 +22,13 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 return [
     'Services'         => [
         'name'          => 'Services',
-        'label'         => teamspeak::seat.services',
+        'label'         => 'Services',
         'icon'          => 'fa-wrench',
         'route_segment' => '',
         'entries'       => [
             [
                 'name'  => 'Teamspeak',
-                'label' => 'teamspeak::seat.teamspeak',
+                'label' => 'Teamspeak',
                 'icon'  => 'fa-group',
                 'route' => 'people.list'
             ],

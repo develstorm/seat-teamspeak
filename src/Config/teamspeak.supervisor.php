@@ -20,24 +20,13 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 return [
-<<<<<<< HEAD
 
-    // Integrating with the SeAT menu is defined here.
-    // Refer to the web package for a structure reference.
-=======
-    'Services'         => [
-        'name'          => 'Services',
-        'label'         => 'Services',
-        'icon'          => 'fa-wrench',
-        'route_segment' => '',
-        'entries'       => [
-            [
-                'name'  => 'Teamspeak',
-                'label' => 'Teamspeak',
-                'icon'  => 'fa-group',
-                'route' => 'people.list'
-            ],
-        ]
+    'rpc'   => [
+        'address'  => env('SUPERVISOR_RPC_ADDRESS', '127.0.0.1'),
+        'username' => env('SUPERVISOR_RPC_USERNAME', 'seat'),
+        'password' => env('SUPERVISOR_RPC_PASSWORD', 'seat'),
+        'port'     => env('SUPERVISOR_RPC_PORT', 9001)
     ],
->>>>>>> seat-teamspeak/master
+    'group' => env('SUPERVISOR_GROUP', 'seat')
+
 ];

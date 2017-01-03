@@ -23,7 +23,15 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 Route::group([
     'namespace'  => 'Seat\Teamspeak\Http\Controllers',
     'prefix' => 'teamspeak'
-    // 'middleware' => 'web'   // Web middleware for state etc since L5.3
+    'middleware' => 'bouncer:superuser'   // Web middleware for state etc since L5.3
 ], function () {
+
+});
+
+Route::group([
+        'namespace'  => 'teamspeak',
+        //'middleware' => 'teamspeak.auth',
+        'prefix'     => 'teamspeak',
+    ], function () {
 
 });

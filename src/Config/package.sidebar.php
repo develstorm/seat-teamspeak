@@ -20,24 +20,22 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 return [
-<<<<<<< HEAD
 
     // Integrating with the SeAT menu is defined here.
     // Refer to the web package for a structure reference.
-=======
     'Services'         => [
-        'name'          => 'Services',
+        'name'          => 'services',
         'label'         => 'Services',
-        'icon'          => 'fa-wrench',
+        'icon'          => 'fa-group',
         'route_segment' => '',
+	'order'		=> '15',
         'entries'       => [
             [
-                'name'  => 'Teamspeak',
+                'name'  => 'teamspeak',
                 'label' => 'Teamspeak',
-                'icon'  => 'fa-group',
+                'icon'  => 'fa-wrench',
                 'route' => 'people.list'
             ],
         ]
     ],
->>>>>>> seat-teamspeak/master
 ];

@@ -19,9 +19,12 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-namespace Vendor\Name\Http\Controllers;
+namespace Seat\Teamspeak\Http\Controllers;
 
 use Seat\Web\Http\Controllers\Controller;
+use Seat\Services\Repositories\Eve\EveRepository;
+use Seat\Services\Repositories\Seat\Stats;
+use Seat\Services\Settings\Seat;
 
 /**
  * Class HomeController
@@ -36,7 +39,7 @@ class HomeController extends Controller
     public function getHome()
     {
 
-        return view('yourpackage::myview');
+        return view(teamspeak::info');
     }
 
 }

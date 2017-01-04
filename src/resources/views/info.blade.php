@@ -1,8 +1,8 @@
 @extends('web::layouts.grids.12')
 
-@section('title', trans('yourpackage::seat.name'))
-@section('page_header', trans('yourpackage::seat.name'))
-@section('page_description', trans('yourpackage::seat.name'))
+@section('title', trans('teamspeak::seat.name'))
+@section('page_header', trans('teamspeak::seat.name'))
+@section('page_description', trans('teamspeak::seat.name'))
 
 @section('full')
 

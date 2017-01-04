@@ -6,7 +6,9 @@
     "require": {
         "eveseat/seat": "^2.0",
         "eveseat/services": "^2.0",
-        "eveseat/web": "^2.0"
+        "eveseat/web": "^2.0",
+        "illuminate/support": "~5.0",
+	"theomessin/ts-framework": "~1.1"
     },
     "require-dev": {
         "eveseat/seat": "^2.0",
@@ -20,18 +22,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "Vendor\\Name\\": "src/"
+            "Seat\\Teamspeak\\": "src/"
         }
     },
-    "minimum-stability": "alpha",
-    "prefer-stable": true,
-    "require": {
-        "php": ">=7.0",
-        "laravel/framework": "5.3.*",
-        "eveseat/web": "2.0.*"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "~5.0"
-    }
 
 }

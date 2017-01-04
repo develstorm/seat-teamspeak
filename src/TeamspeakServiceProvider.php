@@ -5,7 +5,7 @@ namespace Seat\Teamspeak;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 
-class Teamspeak extends ServiceProvider
+class TeamspeakServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -14,8 +14,8 @@ class Teamspeak extends ServiceProvider
      */
         public function boot(Router $router)
     {
-        //$this->add_routes();
-        //$this->add_middleware($router);
+        $this->add_routes();
+        $this->add_middleware($router);
         $this->add_views();
         $this->add_publications();
         $this->add_translations();
@@ -63,7 +63,7 @@ class Teamspeak extends ServiceProvider
      */
     public function add_translations()
     {
-        $this->loadTranslationsFrom(__DIR__ . '/lang', 'api');
+        $this->loadTranslationsFrom(__DIR__ . '/lang', 'teamspeak');
     }
     /**
      * Register the application services.
@@ -74,7 +74,7 @@ class Teamspeak extends ServiceProvider
     {
         // Merge the config with anything in the main app
         $this->mergeConfigFrom(
-            __DIR__ . '/Config/teamspeak.config.php', 'api.config');
+            __DIR__ . '/Config/teamspeak.config.php', 'teamspeak.config');
         // Include this packages menu items
         $this->mergeConfigFrom(
             __DIR__ . '/Config/package.sidebar.php', 'package.sidebar');

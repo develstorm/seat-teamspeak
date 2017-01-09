@@ -21,6 +21,17 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 // Namespace all of the routes for this package.
 Route::group([
+<<<<<<< HEAD
+    'namespace'  => 'Vendor\Name\Http\Controllers',
+    'middleware' => 'web'
+], function () {
+
+    // Your route definitions go here.
+    Route::get('/home', [
+        'as'   => 'home',
+        'uses' => 'HomeController@getHome'
+    ]);
+=======
     'namespace'  => 'Seat\Teamspeak\Http\Controllers',
     'prefix' => 'teamspeak'
     'middleware' => 'bouncer:superuser'   // Web middleware for state etc since L5.3
@@ -33,5 +44,6 @@ Route::group([
         //'middleware' => 'teamspeak.auth',
         'prefix'     => 'teamspeak',
     ], function () {
+>>>>>>> seat-teamspeak/master
 
 });

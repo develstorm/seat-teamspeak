@@ -19,25 +19,24 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-return [
-<<<<<<< HEAD
+namespace Vendor\Name\Http\Controllers;
 
-    // Integrating with the SeAT menu is defined here.
-    // Refer to the web package for a structure reference.
-=======
-    'Services'         => [
-        'name'          => 'Services',
-        'label'         => 'Services',
-        'icon'          => 'fa-wrench',
-        'route_segment' => '',
-        'entries'       => [
-            [
-                'name'  => 'Teamspeak',
-                'label' => 'Teamspeak',
-                'icon'  => 'fa-group',
-                'route' => 'people.list'
-            ],
-        ]
-    ],
->>>>>>> seat-teamspeak/master
-];
+use Seat\Web\Http\Controllers\Controller;
+
+/**
+ * Class HomeController
+ * @package Vendor\Name\Http\Controllers
+ */
+class HomeController extends Controller
+{
+
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function getHome()
+    {
+
+        return view('yourpackage::myview');
+    }
+
+}

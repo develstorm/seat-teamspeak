@@ -21,6 +21,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 return [
 
+    // Language strings for your app go here
+    'name' => 'My Package'
+
     // General
     'teamspeak'		    => 'Services',
     'home'                  => 'Home',

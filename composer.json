@@ -1,6 +1,6 @@
 {
 
-    "name": "eveseat/teamspeak",
+    "name": "zeroserver/teamspeak",
     "description": "EVE SeAT Teamspeak Integration",
     "type": "service",
     "require": {

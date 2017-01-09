@@ -1,10 +1,5 @@
 {
-<<<<<<< HEAD
     "name": "zeroserver/teamspeak",
-=======
-
-    "name": "eveseat/teamspeak",
->>>>>>> b0257e63f744382a44e7ed9d282649034d4115a6
     "description": "EVE SeAT Teamspeak Integration",
     "type": "service",
     "require": {
@@ -22,7 +17,6 @@
             "name": "SauerRam",
             "email": "sauerram@gmx.at"
         }
-<<<<<<< HEAD
     ]
     "repositories": [ {
         "type": "package",
@@ -39,7 +33,6 @@
     "require": {
         "SauerRam/seat-teamspeak": "0.*"
     },
-=======
     ],
     "autoload": {
         "psr-4": {
@@ -57,5 +50,4 @@
         "phpunit/phpunit": "~5.0"
     }
 
->>>>>>> b0257e63f744382a44e7ed9d282649034d4115a6
 }

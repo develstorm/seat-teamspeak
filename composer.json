@@ -19,7 +19,7 @@
             "name": "SauerRam",
             "email": "sauerram@gmx.at"
         }
-    ]
+    ],
     "repositories": [ {
         "type": "package",
         "package": {

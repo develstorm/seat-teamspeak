@@ -1,14 +1,17 @@
 {
-
-    "name": "eveseat/teamspeak",
+    "name": "zeroserver/teamspeak",
     "description": "EVE SeAT Teamspeak Integration",
     "type": "service",
     "require": {
         "eveseat/seat": "^2.0",
         "eveseat/services": "^2.0",
         "eveseat/web": "^2.0",
+<<<<<<< HEAD
         "illuminate/support": "~5.0",
 	"theomessin/ts-framework": "~1.1"
+=======
+	"theomessin/laravel-teamspeak": "^1.0"
+>>>>>>> 6f0f9decd23f5adbd73818b7bc4fbe330e0f1eb9
     },
     "require-dev": {
         "eveseat/seat": "^2.0",
@@ -19,6 +22,22 @@
             "name": "SauerRam",
             "email": "sauerram@gmx.at"
         }
+    ]
+    "repositories": [ {
+        "type": "package",
+        "package": {
+            "name": "SauerRam/seat-teamspeak",
+            "version": "0.1",
+            "source": {
+                "url": "https://github.com/SauerRam/seat-teamspeak.git",
+                "type": "git",
+                "reference": "master"
+              }
+         }
+    }],
+    "require": {
+        "SauerRam/seat-teamspeak": "0.*"
+    },
     ],
     "autoload": {
         "psr-4": {

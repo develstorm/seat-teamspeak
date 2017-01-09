@@ -34,7 +34,7 @@
     }],
     "require": {
         "SauerRam/seat-teamspeak": "0.*"
-    },
+    }
     ],
     "autoload": {
         "psr-4": {

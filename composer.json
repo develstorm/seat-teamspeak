@@ -7,7 +7,7 @@
         "eveseat/services": "^2.0",
         "eveseat/web": "^2.0",
         "illuminate/support": "~5.0",
-	"theomessin/ts-framework": "~1.1"
+	"theomessin/ts-framework": "~1.1",
 	"theomessin/laravel-teamspeak": "^1.0"
     },
     "require-dev": {

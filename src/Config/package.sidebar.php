@@ -34,6 +34,7 @@ return [
                 'name'  => 'teamspeak',
                 'label' => 'Teamspeak',
                 'icon'  => 'fa-wrench',
+                //'route' => 'teamspeak.info'
                 'route' => 'people.list'
             ],
         ]

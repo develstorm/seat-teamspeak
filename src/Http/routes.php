@@ -21,17 +21,13 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 // Namespace all of the routes for this package.
 Route::group([
-    'namespace'  => 'Seat\Teamspeak\Http\Controllers',
+    'namespace'  => 'ZeroServer\Teamspeak\Http\Controllers',
     'prefix' => 'teamspeak'
     //'middleware' => 'bouncer:superuser'   // Web middleware for state etc since L5.3
 ], function () {
 
 });
 
-Route::group([
-        'namespace'  => 'teamspeak',
-        //'middleware' => 'teamspeak.auth',
-        'prefix'     => 'teamspeak',
-    ], function () {
-
-});
+//Route::get('/teamspeak', function() {
+//    return view('info');
+//});

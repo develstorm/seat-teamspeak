@@ -9,9 +9,8 @@
         "eveseat/web": "^2.0",
         "illuminate/support": "~5.0",
 	"theomessin/ts-framework": "~1.1",
-	"theomessin/laravel-teamspeak": "^1.0",
-	"zeroserver/teamspeak": "0.*"
-    },
+	"theomessin/laravel-teamspeak": "^1.0"
+	},
     "require-dev": {
         "eveseat/seat": "^2.0",
         "eveseat/services": "^2.0"
@@ -30,7 +29,7 @@
             "source": {
                 "url": "https://github.com/SauerRam/seat-teamspeak.git",
                 "type": "git",
-                "reference": "master"
+                "reference": "dev"
               }
          }
     }],

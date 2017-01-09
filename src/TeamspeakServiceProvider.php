@@ -1,6 +1,6 @@
 <?php
 
-namespace Seat\Teamspeak;
+namespace ZeroServer\Teamspeak;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
@@ -14,8 +14,8 @@ class TeamspeakServiceProvider extends ServiceProvider
      */
         public function boot(Router $router)
     {
-        $this->add_routes();
-        $this->add_middleware($router);
+        //$this->add_routes();
+        //$this->add_middleware($router);
         $this->add_views();
         $this->add_publications();
         $this->add_translations();

@@ -79,5 +79,15 @@ class TeamspeakServiceProvider extends ServiceProvider
         // Include this packages menu items
         $this->mergeConfigFrom(
             __DIR__ . '/Config/package.sidebar.php', 'package.sidebar');
+        $this->app->singleton('teamspeak', function ($app) {
+            $username = urlencode(config('teamspeak.config.username'));
+            $password = urlencode(config('teamspeak.config.password'));
+            $server = urlencode(config('teamspeak.config.server'));
+            $server_port = urlencode(config('teamspeak.config.server_port'));
+            $server_query_port = urlencode(config('teamspeak.config.server_query_port'));
+            $nickname = urlencode(config('teamspeak.config.nickname'));
+
+            return \TSFramework\Teamspeak::factory("serverquery://$username:$password@$server:$server_query_port/?server_port=$server_port&nickname=$nickname");
+        });
     }
 }

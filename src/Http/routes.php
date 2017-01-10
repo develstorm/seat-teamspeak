@@ -1,33 +1,41 @@
 <?php
-/*
-This file is part of SeAT
 
-Copyright (C) 2015, 2016  Leon Jacobs
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along
-with this program; if not, write to the Free Software Foundation, Inc.,
-51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-*/
-
-// Namespace all of the routes for this package.
 Route::group([
     'namespace'  => 'ZeroServer\Teamspeak\Http\Controllers',
-    'prefix' => 'teamspeak'
-    //'middleware' => 'bouncer:superuser'   // Web middleware for state etc since L5.3
+    'middleware' => 'web',   // Web middleware for state etc since L5.3
+    'prefix' => 'teamspeak',
 ], function () {
 
-});
 
-//Route::get('/teamspeak', function() {
-//    return view('info');
-//});
+    // All routes from here require *at least* that the
+    // user is authenticated. The mfa middleware checks
+    // a setting for the user. We also run the localization
+    // related logic here for translation support. Lastly,
+    // email verification is required to continue.
+
+
+        // Routes from here on may optionally have a multifactor
+        // authentication requirement
+        Route::group(['teamspeak'], function () {
+
+            // The home route does not need any prefixes
+            // and or namespacing modifications, so we will
+            // just include it
+            // include __DIR__ . '/Routes/Home.php';
+
+            // Support Routes
+            Route::group([
+                'namespace' => 'Info',
+                'prefix'    => 'info',
+            ], function () {
+                Route::get('/', [
+                    'as'   => 'teamspeak.info',
+                    'uses' => 'InfoController@info',
+                ]);
+            });
+
+
+        });
+
+});

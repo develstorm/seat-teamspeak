@@ -19,27 +19,24 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-namespace Seat\Teamspeak\Http\Controllers;
+namespace ZeroServer\Teamspeak\Http\Controllers\Info;
 
-use Seat\Web\Http\Controllers\Controller;
-use Seat\Services\Repositories\Eve\EveRepository;
-use Seat\Services\Repositories\Seat\Stats;
-use Seat\Services\Settings\Seat;
+use ZeroServer\Teamspeak\Http\Controllers\Controller;
 
 /**
  * Class HomeController
  * @package Vendor\Name\Http\Controllers
  */
-class HomeController extends Controller
+class InfoController extends Controller
 {
 
     /**
      * @return \Illuminate\View\View
      */
-    public function getHome()
+    public function info()
     {
 
-        return view(teamspeak::info');
+        return view('teamspeak::info');
     }
 
 }

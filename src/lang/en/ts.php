@@ -21,22 +21,10 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 return [
 
-    // Integrating with the SeAT menu is defined here.
-    // Refer to the web package for a structure reference.
-    'Services'         => [
-        'name'          => 'services',
-        'label'         => 'Services',
-        'icon'          => 'fa-group',
-        'route_segment' => '',
-        'route' => 'teamspeak.info',
-	        'entries'       => [
-            [
-                'name'  => 'teamspeak',
-                'label' => 'Teamspeak',
-                'icon'  => 'fa-wrench',
-                //'route' => 'teamspeak'
-                'route' => 'teamspeak.info'
-            ],
-        ]
-    ],
+    // Language strings for your app go here
+    'teamspeak' => 'Teamspeak',
+    'overview' => 'Overview',
+    'online' => 'Online',
+    'unknown' => 'Unknown',
 ];
+

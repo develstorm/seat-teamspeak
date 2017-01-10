@@ -14,8 +14,9 @@ class TeamspeakServiceProvider extends ServiceProvider
      */
         public function boot(Router $router)
     {
-        //$this->add_routes();
-        //$this->add_middleware($router);
+        //$this->package('packages/zeroserver/teamspeak', null, __DIR__);
+        $this->add_routes();
+        $this->add_middleware($router);
         $this->add_views();
         $this->add_publications();
         $this->add_translations();
@@ -46,7 +47,7 @@ class TeamspeakServiceProvider extends ServiceProvider
      */
     public function add_views()
     {
-        $this->loadViewsFrom(__DIR__ . '/resources/views', 'api');
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'teamspeak');
     }
     /**
      * Set the paths for migrations and assets that

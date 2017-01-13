@@ -16,7 +16,7 @@
             {{ $server_status['online'] or trans('teamspeak::ts.unknown') }}
           </span>
           <span class="text-muted">
-            <p>{{ print TSFramework::IViewer }}</p>
+            <p>{{ 'InfoController:TSViewer' }}</p>
           </span>
         </div><!-- /.info-box-content -->
       </div><!-- /.info-box -->

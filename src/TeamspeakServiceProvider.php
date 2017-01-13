@@ -4,6 +4,7 @@ namespace ZeroServer\Teamspeak;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
+use TSFramework\Node\AbstractNode;
 
 class TeamspeakServiceProvider extends ServiceProvider
 {
@@ -20,6 +21,7 @@ class TeamspeakServiceProvider extends ServiceProvider
         $this->add_views();
         $this->add_publications();
         $this->add_translations();
+
     }
 
    /**
@@ -89,5 +91,8 @@ class TeamspeakServiceProvider extends ServiceProvider
 
             return \TSFramework\Teamspeak::factory("serverquery://$username:$password@$server:$server_query_port/?server_port=$server_port&nickname=$nickname");
         });
+        //$this->app->register('Teamspeak');
+        $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+        $loader->alias('TSFramework', 'theomessin\ts-framework');
     }
 }

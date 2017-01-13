@@ -38,5 +38,9 @@ class InfoController extends Controller
 
         return view('teamspeak::info');
     }
+    public function TSViewer()
+    {
+        return \TSFramework\Viewer::IViewer;
+    }
 
 }

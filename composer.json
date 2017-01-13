@@ -8,10 +8,6 @@
         "illuminate/support": "~5.0",
 	    "theomessin/ts-framework": "~1.1"
 	},
-    "require-dev": {
-        "eveseat/seat": "^2.0",
-        "eveseat/services": "^2.0"
-    },
     "authors": [
         {
             "name": "SauerRam",

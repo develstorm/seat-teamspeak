@@ -23,20 +23,33 @@ return [
 
     // Integrating with the SeAT menu is defined here.
     // Refer to the web package for a structure reference.
-    'Services'         => [
-        'name'          => 'services',
-        'label'         => 'Services',
+    'allianz'         => [
+        'name'          => 'alliance',
+        'label'         => 'Allianz',
         'icon'          => 'fa-group',
         'route_segment' => '',
-        'route' => 'teamspeak.info',
-	        'entries'       => [
-            [
-                'name'  => 'teamspeak',
-                'label' => 'Teamspeak',
-                'icon'  => 'fa-wrench',
-                //'route' => 'teamspeak'
-                'route' => 'teamspeak.info'
-            ],
-        ]
+        'entries'       => [
+                [
+                    'name'          => 'services',
+                    'label'         => 'Services',
+                    'icon'          => 'fa-group',
+                    'route_segment' => 'teamspeak',
+                    'route'         => 'teamspeak.info',
+                    //'entries'       => [],
+                ],
+                [
+                    'name'  => 'teamspeak',
+                    'label' => 'Teamspeak',
+                    'icon'  => 'fa-wrench',
+                    'route' => 'teamspeak.info',
+                ],
+                [
+                    'name'  => 'forum',
+                    'label' => 'Forum',
+                    'icon'  => 'fa-list',
+                    'route' => 'forum.index',
+                ],
+                    //],
+        ],
     ],
 ];

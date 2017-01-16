@@ -14,10 +14,10 @@ Route::group([
     // related logic here for translation support. Lastly,
     // email verification is required to continue.
 
-
+    //Route::resource('/teamspeak', 'InfoController');
         // Routes from here on may optionally have a multifactor
         // authentication requirement
-        Route::group(['teamspeak'], function () {
+        //Route::group(['teamspeak'], function () {
 
             // The home route does not need any prefixes
             // and or namespacing modifications, so we will
@@ -34,8 +34,17 @@ Route::group([
                     'uses' => 'InfoController@info',
                 ]);
             });
+            Route::group([
+                'namespace' => 'Info',
+                'prefix'    => 'Info',
+            ], function () {
+                Route::get('/', [
+                    'as'   => 'teamspeak.viewer',
+                    'uses' => 'InfoController@viewer',
+                ]);
+            });
 
 
-        });
-
+        //});
+    
 });

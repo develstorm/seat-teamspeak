@@ -1,6 +1,6 @@
 @extends('web::layouts.grids.12')
 
-@section('title', trans('teamspeak::ts.overview'))
+@section('title', trans('teamspeak::ts.teamspeak'))
 @section('page_header', trans('teamspeak::ts.overview'))
 
 @section('full')
@@ -13,10 +13,12 @@
         <div class="info-box-content">
           <span class="info-box-text">{{ trans('teamspeak::ts.online') }}</span>
           <span class="info-box-number">
-            {{ $server_status['online'] or trans('teamspeak::ts.unknown') }}
+            {{ $count or trans('teamspeak::ts.unknown') }}
           </span>
           <span class="text-muted">
-            <p>{{ 'InfoController:TSViewer' }}</p>
+            <p>
+              @include('teamspeak::partials.viewer')
+            </p>
           </span>
         </div><!-- /.info-box-content -->
       </div><!-- /.info-box -->
@@ -29,6 +31,12 @@
         <div class="info-box-content">
           <span class="info-box-text"></span>
           <span class="info-box-number"></span>
+            <span class="text-muted">
+              <p>
+                @include('teamspeak::partials.settings')
+              </p>
+            </span>
+
         </div><!-- /.info-box-content -->
       </div><!-- /.info-box -->
 

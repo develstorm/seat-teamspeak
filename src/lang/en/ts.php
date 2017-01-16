@@ -24,7 +24,7 @@ return [
     // Language strings for your app go here
     'teamspeak' => 'Teamspeak',
     'overview' => 'Overview',
-    'online' => 'Online',
+    'online' => 'Online Clients',
     'unknown' => 'Unknown',
 ];
 

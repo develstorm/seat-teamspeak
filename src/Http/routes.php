@@ -33,16 +33,20 @@ Route::group([
                     'as'   => 'teamspeak.info',
                     'uses' => 'InfoController@info',
                 ]);
+
             });
-            Route::group([
-                'namespace' => 'Info',
-                'prefix'    => 'Info',
-            ], function () {
-                Route::get('/', [
-                    'as'   => 'teamspeak.viewer',
-                    'uses' => 'InfoController@viewer',
-                ]);
-            });
+            Route::get('/register', [
+                'as'   => 'teamspeak.view.register',
+                'uses' => 'RegisterController@index',
+            ]);
+            Route::get('/config', [
+                'as'   => 'teamspeak.view.config',
+                'uses' => 'ConfigController@index',
+            ]);
+            Route::get('/', [
+                'as'   => 'teamspeak.viewer',
+                'uses' => 'InfoController@viewer',
+            ]);
 
 
         //});

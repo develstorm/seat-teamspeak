@@ -6,6 +6,7 @@ use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
+use ZeroServer\Teamspeak\Http\Composers\TeamspeakMenu;
 use TSFramework\Teamspeak;
 
 
@@ -21,11 +22,12 @@ class TeamspeakServiceProvider extends ServiceProvider
         $this->add_routes();
         $this->add_middleware($router);
         $this->add_views();
+        $this->add_view_composers();
         $this->add_publications();
         $this->add_translations();
-        $this->publishes([
-            __DIR__.'/Config/teamspeak.config.php' => config_path('teamspeak.config'),
-        ], 'config');
+//        $this->publishes([
+//            __DIR__.'/Config/teamspeak.config.php' => config_path('teamspeak.config'),
+//        ], 'config');
         //$this->package('Teamspeak', null, __DIR__);
         //$this->app->teamspeak->register('ts3');
 
@@ -62,6 +64,17 @@ class TeamspeakServiceProvider extends ServiceProvider
      * Set the paths for migrations and assets that
      * should be published to the main application.
      */
+    public function add_view_composers()
+    {
+        // Teamspeak menu composer
+        $this->app['view']->composer([
+            'teamspeak::includes.menu',
+        ], TeamspeakMenu::class);
+        
+        $this->app['view']->composer([
+            'teamspeak::admin.includes.menu',
+        ], ConfigMenu::class);
+    }
     public function add_publications()
     {
         $this->publishes([
@@ -92,6 +105,17 @@ class TeamspeakServiceProvider extends ServiceProvider
         // Merge the config with anything in the main app
         $this->mergeConfigFrom(
             __DIR__ . '/Config/teamspeak.config.php', 'teamspeak.config');
+        $this->mergeConfigFrom(
+            __DIR__ . '/Config/teamspeak.permissions.php', 'teamspeak.permissions');
+        $this->mergeConfigFrom(
+            __DIR__ . '/Config/teamspeak.locale.php', 'teamspeak.locale');
+
+        // Menu Configurations
+        $this->mergeConfigFrom(
+            __DIR__ . '/Config/package.teamspeak.menu.php', 'package.teamspeak.menu');
+        $this->mergeConfigFrom(
+            __DIR__ . '/Config/package.admin.menu.php', 'package.admin.menu');
+
         // Include this packages menu items
 
         $this->app->singleton('teamspeak', function ($app) {

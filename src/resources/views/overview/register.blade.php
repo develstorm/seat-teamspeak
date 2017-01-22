@@ -37,10 +37,17 @@
 
                     <br><br>Address - ts3.eve-igc.de
 
-                    <br><br>Benutzername:
-
+                    <br><br>Benutzername:<br>
+                        @if(is_null(setting('main_character_name')))
+                            <a href="{{ route('profile.view') }}">{{ trans('web::seat.no_main_char') }}!</a>
+                        @else
+                                {{ setting('main_character_name') }}
+                        @endif
 
                     <br><br><br>Your TeamSpeak Unique ID:
+                    <br><br>Status:<br>{{ $status }}
+                    <br><br>User:<br>{{ $User }}
+                    <br><br>Client:<br>{{ print_r($client) }}
                 </div>
             </div>
         </div>

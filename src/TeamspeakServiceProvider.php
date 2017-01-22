@@ -25,6 +25,7 @@ class TeamspeakServiceProvider extends ServiceProvider
         $this->add_view_composers();
         $this->add_publications();
         $this->add_translations();
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 //        $this->publishes([
 //            __DIR__.'/Config/teamspeak.config.php' => config_path('teamspeak.config'),
 //        ], 'config');

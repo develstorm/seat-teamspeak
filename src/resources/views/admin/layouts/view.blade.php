@@ -15,7 +15,7 @@
 
         <div class="col-md-12">
 
-            {{--@include('teamspeak::admin.includes.menu')--}}
+            @include('teamspeak::admin.includes.menu')
 
         </div>
 

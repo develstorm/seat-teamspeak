@@ -7,6 +7,7 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use ZeroServer\Teamspeak\Http\Composers\TeamspeakMenu;
+use ZeroServer\Teamspeak\Http\Composers\ConfigMenu;
 use TSFramework\Teamspeak;
 
 

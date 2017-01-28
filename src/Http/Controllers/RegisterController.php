@@ -4,7 +4,7 @@ namespace ZeroServer\Teamspeak\Http\Controllers;
 
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use TSFramework;
-use ZeroServer\Teamspeak;
+use ZeroServer\Teamspeakw;
 use ZeroServer\Teamspeak\Http\Controllers\Controller;
 
 class RegisterController extends Controller

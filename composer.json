@@ -6,7 +6,9 @@
     "require": {
         "eveseat/web": "^2.0",
         "illuminate/support": "~5.0",
-	    "theomessin/ts-framework": "~1.1"
+	    "theomessin/ts-framework": "~1.1",
+        "erusev/parsedown": "^1.6",
+        "planetteamspeak/ts3-php-framework": "^1.1"
 	},
     "authors": [
         {

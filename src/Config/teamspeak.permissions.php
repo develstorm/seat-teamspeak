@@ -22,11 +22,17 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 return [
 
     'teamspeak' => [
-        'view',
-        'list',
-        'config',
+        'info',
         'register',
+        'config',
+        'create',
+        'view',
     ],
+    'tsserver' => [
+        'admin',
+        'operator',
+        'fleet',
+    ]
 
 //    'superuser',
 //    'queue_manager',

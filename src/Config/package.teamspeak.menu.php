@@ -40,7 +40,7 @@ return [
         'label'          => 'Settings',
         'permission'     => 'teamspeak.config',
         'highlight_view' => 'config',
-        'route'          => 'teamspeak.view.config',
+        'route'          => 'teamspeak.list',
     ],
 //    [
 //        'name'           => 'Permissions',

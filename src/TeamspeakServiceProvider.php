@@ -8,7 +8,11 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use ZeroServer\Teamspeak\Http\Composers\TeamspeakMenu;
 use ZeroServer\Teamspeak\Http\Composers\ConfigMenu;
+use ZeroServer\Teamspeak\Commands\TeamspeakLogsClear;
+use ZeroServer\Teamspeak\Commands\TeamspeakUpdate;
+use ZeroServer\Teamspeak\Commands\TeamspeakGroupsUpdate;
 use TSFramework\Teamspeak;
+use Seat\Services\Settings\Seat;
 
 
 class TeamspeakServiceProvider extends ServiceProvider
@@ -21,17 +25,13 @@ class TeamspeakServiceProvider extends ServiceProvider
         public function boot(Router $router)
     {
         $this->add_routes();
+        $this->addCommands();
         $this->add_middleware($router);
         $this->add_views();
         $this->add_view_composers();
         $this->add_publications();
         $this->add_translations();
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
-//        $this->publishes([
-//            __DIR__.'/Config/teamspeak.config.php' => config_path('teamspeak.config'),
-//        ], 'config');
-        //$this->package('Teamspeak', null, __DIR__);
-        //$this->app->teamspeak->register('ts3');
 
     }
 
@@ -44,6 +44,16 @@ class TeamspeakServiceProvider extends ServiceProvider
             include __DIR__ . '/Http/routes.php';
         }
     }
+
+    public function addCommands()
+    {
+        $this->commands([
+            TeamspeakUpdate::class,
+            TeamspeakGroupsUpdate::class,
+            TeamspeakLogsClear::class
+        ]);
+    }
+
     /**
      * Include the middleware needed.
      *
@@ -53,7 +63,7 @@ class TeamspeakServiceProvider extends ServiceProvider
     {
         // Authenticate checks that the token is valid
         // from an allowed IP address
-        // $router->middleware('teamspeak.auth', ApiToken::class);
+        $router->middleware('teamspeak.auth', ApiToken::class);
     }
     /**
      * Set the path and namespace for the views.
@@ -108,7 +118,7 @@ class TeamspeakServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__ . '/Config/teamspeak.config.php', 'teamspeak.config');
         $this->mergeConfigFrom(
-            __DIR__ . '/Config/teamspeak.permissions.php', 'teamspeak.permissions');
+            __DIR__ . '/Config/teamspeak.permissions.php', 'web.permissions');
         $this->mergeConfigFrom(
             __DIR__ . '/Config/teamspeak.locale.php', 'teamspeak.locale');
 
@@ -121,20 +131,17 @@ class TeamspeakServiceProvider extends ServiceProvider
         // Include this packages menu items
 
         $this->app->singleton('teamspeak', function ($app) {
-            $username = urlencode(config('teamspeak.config.username'));
-            $password = urlencode(config('teamspeak.config.password'));
-            $server = urlencode(config('teamspeak.config.server'));
-            $server_port = urlencode(config('teamspeak.config.server_port'));
-            $server_query_port = urlencode(config('teamspeak.config.server_query_port'));
-            $nickname = urlencode(config('teamspeak.config.nickname'));
+            $username = Seat::get('teamspeak_username');
+            $password = Seat::get('teamspeak_password');
+            $server = Seat::get('teamspeak_hostname');
+            $server_port = Seat::get('teamspeak_server_port');
+            $server_query_port = Seat::get('teamspeak_server_query');
+            $nickname = 'SeAT';
 
             $this->app->teamspeak = \TSFramework\Teamspeak::factory("serverquery://$username:$password@$server:$server_query_port/?server_port=$server_port&nickname=$nickname");
                 return $this->app->teamspeak;
 
-            //return \TSFramework\Teamspeak::factory("serverquery://$username:$password@$server:$server_query_port/?server_port=$server_port&nickname=$nickname");
         });
 
-        //$loader = \Illuminate\Foundation\AliasLoader::getInstance();
-        //$loader->alias('TSFramework', 'theomessin\ts-framework');
     }
 }

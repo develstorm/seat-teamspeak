@@ -26,5 +26,28 @@ return [
     'overview' => 'Overview',
     'online' => 'Online Clients',
     'unknown' => 'Unknown',
+    
+    'management' => 'Teamspeak Access Management',
+    'quick_create' => 'Quick create',
+    'type' => 'Type',
+    'username' => 'Username',
+    'groups' => 'Server Groups',
+    'add' => 'Add',
+    'authorisations' => 'Authorisations',
+    'user_filter' => 'User Filter',
+    'role_filter' => 'Role Filter',
+    'corporation_filter' => 'Corporation Filter',
+    'alliance_filter' => 'Alliance Filter',
+    'public_filter' => 'Public Filter',
+    'created' => 'Created',
+    'updated' => 'Updated',
+    'status' => 'Status',
+    'role' => 'Role',
+    'corporation' => 'Corporation',
+    'alliance' => 'Alliance',
+    'remove' => 'Remove',
+    'enabled' => 'Enabled',
+    'settings' => 'Teamspeak Settings'
+
 ];
 

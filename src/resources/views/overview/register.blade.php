@@ -4,28 +4,38 @@
 @section('page_header', 'Registration')
 
 @section('teamspeak_content')
+<div class="row">
 
-    <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-24">
+        <div class="col-md-8 col-sm-8 col-xs-16">
 
             <div class="info-box">
-                <span class="info-box-icon bg-green"><i class="fa fa-briefcase"></i></span>
+                <span class="info-box-icon bg-green"><i class="fa fa-user"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text"></span>
                     <span class="info-box-number"></span>
-            <span class="text-muted">
+            <span class="text">
+                <p>
+                    Connection Status:
+                </p>
               <p>
-                  Registrierungsstatus: keinPlan
+                  @if(!empty($status['client']))
+                      <i class="fa fa-circle" style="color: lawngreen"></i> {{ $status['client'] }}
+                  @else
+                      <i class="fa fa-circle" style="color: red"></i> Client Not Connected
+                  @endif
+                  <br>
+                  @if(!empty($status['user']))
+                      <i class="fa fa-circle" style="color: lawngreen"></i> {{ $status['user'] }}
+                  @else
+                      <i class="fa fa-circle" style="color: red"></i> User Not Connected
+                  @endif
               </p>
             </span>
 
                 </div><!-- /.info-box-content -->
             </div><!-- /.info-box -->
 
-        </div><!-- /.col -->
-    </div>
-    <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-24">
+
             <div class="box box-info">
                 <div class="box-body">
                     Registrierungsanweisungen
@@ -37,22 +47,62 @@
 
                     <br><br>Address - ts3.eve-igc.de
 
-                    <br><br>Benutzername:<br>
+                    <br><br>Benutzername:
                         @if(is_null(setting('main_character_name')))
                             <a href="{{ route('profile.view') }}">{{ trans('web::seat.no_main_char') }}!</a>
                         @else
                                 {{ setting('main_character_name') }}
                         @endif
 
-                    <br><br><br>Your TeamSpeak Unique ID:
-                    <br><br>Status:<br>{{ $status }}
-                    <br><br>User:<br>{{ $User }}
-                    <br><br>Client:<br>{{ print_r($client) }}
+                    <br>Registered Unique ID: <b>{{ $user->TsUID }}</b>
+                    <br>Client Unique ID: <b>
+                                {{--{{ print_r($status['client']) }}--}}
+                        @if($client['client_unique_identifier'])
+                                {{ $client['client_unique_identifier'] }}
+                        @else
+                            not matching, wrong nickname?
+                        @endif
+
+
+                    </b>
+                    <br>
+                    <br>
+
+
+
+
+                    <form role="form" action="{{ route('teamspeak.register.save') }}" method="post"
+                          class="form-horizontal">
+                        {{ csrf_field() }}
+
+                        <div class="box-footer">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="submit"></label>
+                                <div class="col-md-4">
+                                    @if(!empty($status['client']))
+                                    <button id="submit" type="submit" class="btn btn-primary">
+                                        @if($user->TsUID != '')
+                                            Update
+                                        @else
+                                            Register
+                                        @endif
+
+                                    </button>
+                                    @else
+                                    <button type="submit" disabled class="btn btn-default">
+                                        Register
+                                    </button>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
 
+    @include('teamspeak::overview.partials.viewer')
+</div>
 @stop
 
 

@@ -1,32 +1,39 @@
-<div style="padding-bottom: 15px;">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Administration</h3>
+    </div>
 
-    <ul class="nav nav-pills">
 
-        @foreach($menu as $menu_entry)
+    <div style="padding-bottom: 15px;">
 
-            @if(auth()->user()->has($menu_entry['permission']))
+        <ul class="nav nav-tabs nav-stacked">
 
-                <li role="presentation"
-                    class="@if ($viewname == $menu_entry['highlight_view']) active @endif">
+            @foreach($menu as $menu_entry)
 
-                    <a href="{{ route($menu_entry['route']) }}">
-                        @if (array_key_exists('label', $menu_entry))
-                            @if(array_key_exists('plural', $menu_entry))
-                                {{ trans_choice($menu_entry['label'], 2) }}
+                @if(auth()->user()->has($menu_entry['permission']))
+
+                    <li role="presentation"
+                        class="@if ($s_viewname == $menu_entry['highlight_view']) active @endif">
+
+                        <a href="{{ route($menu_entry['route']) }}">
+                            @if (array_key_exists('label', $menu_entry))
+                                @if(array_key_exists('plural', $menu_entry))
+                                    {{ trans_choice($menu_entry['label'], 2) }}
+                                @else
+                                    {{ trans($menu_entry['label']) }}
+                                @endif
                             @else
-                                {{ trans($menu_entry['label']) }}
+                                {{ $menu_entry['name'] }}
                             @endif
-                        @else
-                            {{ $menu_entry['name'] }}
-                        @endif
-                    </a>
+                        </a>
 
-                </li>
+                    </li>
 
-            @endif
+                @endif
 
-        @endforeach
+            @endforeach
 
-    </ul>
+        </ul>
 
+    </div>
 </div>

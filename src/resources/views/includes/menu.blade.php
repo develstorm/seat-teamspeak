@@ -4,7 +4,7 @@
 
         @foreach($menu as $menu_entry)
 
-            @if(auth()->user()->has($menu_entry['permission']))
+            @if(auth()->user()->has($menu_entry['permission'], false))
 
                 <li role="presentation"
                     class="@if ($viewname == $menu_entry['highlight_view']) active @endif">

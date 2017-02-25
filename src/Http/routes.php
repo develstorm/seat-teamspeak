@@ -72,23 +72,18 @@ Route::group([
                 'uses' => 'TeamspeakController@postConfiguration',
                 'middleware' => 'bouncer:teamspeak.config'
             ]);
-    
-            // Support Routes
-
-                Route::get('/info', [
-                    'as'   => 'teamspeak.info',
-                    'uses' => 'InfoController@info',
-                ]);
-                Route::get('/register', [
-                    'as'   => 'teamspeak.view.register',
-                    'uses' => 'RegisterController@index',
-                ]);
-
-
-                Route::post('/register', [
-                    'as'   => 'teamspeak.register.save',
-                    'uses' => 'RegisterController@saveUID',
-                ]);
+            Route::get('/info', [
+                'as'   => 'teamspeak.info',
+                'uses' => 'InfoController@info',
+            ]);
+            Route::get('/register', [
+                'as'   => 'teamspeak.view.register',
+                'uses' => 'RegisterController@index',
+            ]);
+            Route::post('/register', [
+                'as'   => 'teamspeak.register.save',
+                'uses' => 'RegisterController@saveUID',
+            ]);
 
 
 

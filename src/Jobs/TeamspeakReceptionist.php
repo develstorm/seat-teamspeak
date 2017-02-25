@@ -5,6 +5,7 @@ namespace ZeroServer\Teamspeak\Jobs;
 use Seat\Eveapi\Models\Eve\ApiKey;
 use ZeroServer\Teamspeak\Exceptions\TeamspeakServerGroupException;
 use ZeroServer\Teamspeak\Models\TeamspeakUser;
+use TSFramework\Node\Client;
 
 class TeamspeakReceptionist extends AbstractTeamspeak
 {
@@ -24,10 +25,16 @@ class TeamspeakReceptionist extends AbstractTeamspeak
             // control that we already know it's Teamspeak ID
             if ($teamspeakUser != null) {
                 // search client information using client unique ID
-                $userInfo = $this->getTeamspeak()->clientGetByUid($teamspeakUser->teamspeak_id, true);
+                $userInfo = $this->getTeamspeak()->clientGetByDbid($teamspeakUser->teamspeak_id, true);
 
                 $allowedGroups = $this->allowedGroups($teamspeakUser, true);
-                $memberOfGroups = $this->getTeamspeak()->clientGetServerGroupsByDbid($userInfo->client_database_id);
+                $teamspeakGroups = $this->getTeamspeak()->clientGetServerGroupsByDbid($teamspeakUser->teamspeak_id);
+
+                $memberOfGroups = [];
+                foreach ($teamspeakGroups as $g) {
+                    $memberOfGroups[] = $g['sgid'];
+                    }
+                
                 $missingGroups = array_diff($allowedGroups, $memberOfGroups);
 
                 if (!empty($missingGroups)) {
@@ -47,11 +54,11 @@ class TeamspeakReceptionist extends AbstractTeamspeak
      * @param array $groups
      * @throws TeamspeakServerGroupException
      */
-    private function processGroupsInvitation(\TeamSpeak3_Node_Client $teamspeakClientNode, $groups)
+    private function processGroupsInvitation($teamspeakClientNode, $groups)
     {
         // iterate over each group ID and add the user
         foreach ($groups as $groupId) {
-            $this->getTeamspeak()->serverGroupClientAdd($groupId, $teamspeakClientNode->client_database_id);
+            $this->getTeamspeak()->serverGroupClientAdd($groupId, $teamspeakClientNode->teamspeak_id);
         }
     }
 }

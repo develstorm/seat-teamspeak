@@ -4,9 +4,9 @@ namespace ZeroServer\Teamspeak\Commands;
 
 
 use Illuminate\Console\Command;
-use Seat\Eveapi\Helpers\JobContainer;
+use Seat\Eveapi\Helpers\JobPayloadContainer;
 use Seat\Eveapi\Traits\JobManager;
-use Seat\Warlof\Teamspeak\Jobs\TeamspeakUpdater;
+use ZeroServer\Teamspeak\Jobs\TeamspeakUpdater;
 use Seat\Web\Models\User;
 
 class TeamspeakUpdate extends Command
@@ -22,7 +22,7 @@ class TeamspeakUpdate extends Command
         parent::__construct();
     }
 
-    public function handle(JobContainer $job)
+    public function handle(JobPayloadContainer $job)
     {
         User::where('active', true)->chunk(10, function($users) use ($job) {
 

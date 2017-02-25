@@ -4,6 +4,7 @@ namespace ZeroServer\Teamspeak\Jobs;
 
 use Seat\Eveapi\Models\Eve\ApiKey;
 use ZeroServer\Teamspeak\Models\TeamspeakUser;
+//use TSFramework\Node\Client;
 
 class TeamspeakAssKicker extends AbstractTeamspeak
 {
@@ -16,21 +17,26 @@ class TeamspeakAssKicker extends AbstractTeamspeak
         $keys = ApiKey::where('user_id', $this->user->id)->get();
         // get the Teamspeak User
         $teamspeakUser = TeamspeakUser::where('user_id', $this->user->id)
-            ->where('invited', true)
             ->whereNotNull('teamspeak_id')
             ->first();
 
         if ($teamspeakUser != null) {
             // get channels into which current user is already member
-            $userInfo = $this->getTeamspeak()->clientGetByUid($teamspeakUser->teamspeak_id, true);
-            $groups = $this->getTeamspeak()->clientGetServerGroupsByDbid($userInfo->client_database_id);
+            $userInfo = $this->getTeamspeak()->clientGetByDbid($teamspeakUser->teamspeak_id, true);
+            //$groups = $this->getTeamspeak()->clientGetServerGroupsByDbid($userInfo->client_database_id);
+            $teamspeakGroups = $this->getTeamspeak()->clientGetServerGroupsByDbid($teamspeakUser->teamspeak_id);
+
+            $memberOfGroups = [];
+            foreach ($teamspeakGroups as $g) {
+                    $memberOfGroups[] = $g['sgid'];
+            }
 
             // if key are not valid OR account no longer paid
             // kick the user from all channels to which he's member
             if ($this->isEnabledKey($keys) == false || $this->isActive($keys) == false) {
 
                 if (!empty($groups)) {
-                    $this->processGroupsKick($teamspeakUser, $groups);
+                    $this->processGroupsKick($userInfo, $groups);
                     $this->logEvent('kick', $groups);
                 }
 
@@ -40,12 +46,13 @@ class TeamspeakAssKicker extends AbstractTeamspeak
             // in other way, compute the gap and kick only the user
             // to channel from which he's no longer granted to be in
             $allowedGroups = $this->allowedGroups($teamspeakUser, true);
-            $extraGroups = array_diff($groups, $allowedGroups);
+            $extraGroups = array_diff($memberOfGroups, $allowedGroups);
 
             // remove granted channels from channels in which user is already in and kick him
             if (!empty($extraGroups)) {
-                $this->processGroupsKick($teamspeakUser, $extraGroups);
                 $this->logEvent('kick', $extraGroups);
+                $this->processGroupsKick($userInfo, $extraGroups);
+
             }
         }
 
@@ -59,10 +66,10 @@ class TeamspeakAssKicker extends AbstractTeamspeak
      * @param $groups
      * @throws \ZeroServer\Teamspeak\Exceptions\TeamspeakServerGroupException
      */
-    private function processGroupsKick(\TeamSpeak3_Node_Client $teamspeakClientNode, $groups)
+    private function processGroupsKick(\TSFramework_Node_CLient $teamspeakClientNode, $groups)
     {
         foreach ($groups as $groupId) {
-            $this->getTeamspeak()->serverGroupClientDel($teamspeakClientNode->client_database_id, $groupId);
+                $this->getTeamspeak()->serverGroupClientDel($groupId, $teamspeakClientNode->teamspeak_id);
         }
     }
 

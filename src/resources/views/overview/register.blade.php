@@ -54,15 +54,15 @@
                                 {{ setting('main_character_name') }}
                         @endif
 
-                    <br>Registered Unique ID: <b>{{ $user->TsUID }}</b>
+
                     <br>Client Unique ID: <b>
-                                {{--{{ print_r($status['client']) }}--}}
                         @if($client['client_unique_identifier'])
                                 {{ $client['client_unique_identifier'] }}
                         @else
                             not matching, wrong nickname?
                         @endif
-
+                        </b>
+                    <br>Registered Unique ID: <b>{{ $ts }}</b>
 
                     </b>
                     <br>
@@ -81,7 +81,7 @@
                                 <div class="col-md-4">
                                     @if(!empty($status['client']))
                                     <button id="submit" type="submit" class="btn btn-primary">
-                                        @if($user->TsUID != '')
+                                        @if($ts)
                                             Update
                                         @else
                                             Register
@@ -102,6 +102,7 @@
         </div>
 
     @include('teamspeak::overview.partials.viewer')
+
 </div>
 @stop
 

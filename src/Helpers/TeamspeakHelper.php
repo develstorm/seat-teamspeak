@@ -2,6 +2,13 @@
 
 namespace ZeroServer\Teamspeak\Helpers;
 
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
+use Seat\Eveapi\Models\Character\CharacterSheet;
+use Seat\Eveapi\Models\Eve\ApiKey;
+use Seat\Web\Models\User;
+use ZeroServer\Teamspeak\Models\TeamspeakUser;
 
 class TeamspeakHelper
 {
@@ -15,7 +22,7 @@ class TeamspeakHelper
      */
     public static function connect($tsUsername, $tsPassword, $tsHostname, $tsServerQuery, $tsServerPort)
     {
-        return \TeamSpeak3::factory("serverquery://" . $tsUsername . ':' . $tsPassword . '@' . $tsHostname .
-            ':' . $tsServerQuery . "/?server_port=" . $tsServerPort);
+        return \TSFramework\Teamspeak::factory("serverquery://" . $tsUsername . ":" . $tsPassword . "@" . $tsHostname .
+            ":" . $tsServerQuery . "/?server_port=" . $tsServerPort);
     }
 }

@@ -25,6 +25,8 @@ class CreateTeamspeakTables extends Migration
         Schema::create('teamspeak_users', function (Blueprint $table) {
             $table->unsignedInteger('user_id');
             $table->string('teamspeak_id');
+            $table->string('teamspeak_uid', 40);
+            $table->boolean('invited');
             $table->timestamps();
 
             $table->primary('user_id');

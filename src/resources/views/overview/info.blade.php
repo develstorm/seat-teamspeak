@@ -28,9 +28,11 @@
           <h3 class="box-title">General Rules</h3>
         </div>
         <div class="box-body">
-          1.<br>
-          2.<br>
-          3.
+           1. <a href="https://github.com/SauerRam/seat-teamspeak">Teamspeak</a><br>
+          2. <a href="https://github.com/SauerRam/seat-forum">Forum</a><br>
+          3. <a href="https://github.com/SauerRam/seat-forum-frontend">Forum Frontend</a><br>
+          4. <a href="https://github.com/SauerRam/seat-mainframe">Mainframe</a>
+
         </div>
       </div>
       <div class="box box-info">

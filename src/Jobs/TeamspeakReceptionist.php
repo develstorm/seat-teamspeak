@@ -23,20 +23,18 @@ class TeamspeakReceptionist extends AbstractTeamspeak
             // get the attached teamspeak user
             $teamspeakUser = TeamspeakUser::where('user_id', $this->user->id)->first();
             // control that we already know it's Teamspeak ID
-            if ($teamspeakUser != null) {
+           if ($teamspeakUser != null) {
                 // search client information using client unique ID
-                $userInfo = $this->getTeamspeak()->clientGetByDbid($teamspeakUser->teamspeak_id, true);
+                $userInfo = $this->getTeamspeak()->clientGetByDbid($teamspeakUser->teamspeak_id);
 
                 $allowedGroups = $this->allowedGroups($teamspeakUser, true);
                 $teamspeakGroups = $this->getTeamspeak()->clientGetServerGroupsByDbid($teamspeakUser->teamspeak_id);
-
                 $memberOfGroups = [];
                 foreach ($teamspeakGroups as $g) {
                     $memberOfGroups[] = $g['sgid'];
                     }
                 
                 $missingGroups = array_diff($allowedGroups, $memberOfGroups);
-
                 if (!empty($missingGroups)) {
                     $this->processGroupsInvitation($userInfo, $missingGroups);
                     $this->logEvent('invite', $missingGroups);
@@ -58,7 +56,9 @@ class TeamspeakReceptionist extends AbstractTeamspeak
     {
         // iterate over each group ID and add the user
         foreach ($groups as $groupId) {
-            $this->getTeamspeak()->serverGroupClientAdd($groupId, $teamspeakClientNode->teamspeak_id);
+            if($groupId != 8){
+                $this->getTeamspeak()->serverGroupClientAdd($groupId, $teamspeakClientNode->client_database_id);
+            }
         }
     }
 }

@@ -5,17 +5,20 @@
     <div class="col-md-12">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">{{ trans('teamspeak::ts.quick_create') }}</h3>
+            <h3 class="panel-title">
+                <a href="#show" data-toggle="collapse">
+                    <i class="fa fa-plus"></i>
+                 {{ trans('teamspeak::ts.quick_create') }}</a></h3>
         </div>
-        <div class="panel-body">
+        <div class="panel-body collapse" data-toggle="collapse" id="show">
             <form role="form" action="{{ route('teamspeak.add') }}" method="post">
                 {{ csrf_field() }}
 
-                <div class="box-body">
+                <div class="box-body" >
 
                     <div class="form-group">
                         <label for="teamspeak-type">{{ trans('teamspeak::ts.type') }}</label>
-                        <select name="teamspeak-type" id="teamspeak-type" class="col-md-12">
+                        <select name="teamspeak-type" id="teamspeak-type" class="col-md-12" style="width: 100%">
                             <option value="user">{{ trans('teamspeak::ts.user_filter') }}</option>
                             <option value="role">{{ trans('teamspeak::ts.role_filter') }}</option>
                             <option value="corporation">{{ trans('teamspeak::ts.corporation_filter') }}</option>
@@ -26,7 +29,7 @@
 
                     <div class="form-group">
                         <label for="teamspeak-user-id">{{ trans('teamspeak::ts.username') }}</label>
-                        <select name="teamspeak-user-id" id="teamspeak-user-id" class="col-md-12">
+                        <select name="teamspeak-user-id" id="teamspeak-user-id" class="col-md-12" style="width: 100%">
                             @foreach($users as $user)
                                 <option value="{{ $user->id }}">{{ $user->name }}</option>
                             @endforeach
@@ -35,7 +38,7 @@
 
                     <div class="form-group">
                         <label for="teamspeak-role-id">{{ trans('teamspeak::ts.role') }}</label>
-                        <select name="teamspeak-role-id" id="teamspeak-role-id" class="col-md-12" disabled="disabled">
+                        <select name="teamspeak-role-id" id="teamspeak-role-id" class="col-md-12" disabled="disabled" style="width: 100%">
                             @foreach($roles as $role)
                                 <option value="{{ $role->id }}">{{ $role->title }}</option>
                             @endforeach
@@ -44,7 +47,7 @@
 
                     <div class="form-group">
                         <label for="teamspeak-corporation-id">{{ trans('teamspeak::ts.corporation') }}</label>
-                        <select name="teamspeak-corporation-id" id="teamspeak-corporation-id" class="col-md-12" disabled="disabled">
+                        <select name="teamspeak-corporation-id" id="teamspeak-corporation-id" class="col-md-12" disabled="disabled" style="width: 100%">
                             @foreach($corporations as $corporation)
                                 <option value="{{ $corporation->corporationID }}">{{ $corporation->corporationName }}</option>
                             @endforeach
@@ -53,7 +56,7 @@
 
                     <div class="form-group">
                         <label for="teamspeak-alliance-id">{{ trans('teamspeak::ts.alliance') }}</label>
-                        <select name="teamspeak-alliance-id" id="teamspeak-alliance-id" class="col-md-12" disabled="disabled">
+                        <select name="teamspeak-alliance-id" id="teamspeak-alliance-id" class="col-md-12" disabled="disabled" style="width: 100%">
                             @foreach($alliances as $alliance)
                                 <option value="{{ $alliance->allianceID }}">{{ $alliance->name }}</option>
                             @endforeach
@@ -62,7 +65,7 @@
 
                     <div class="form-group">
                         <label for="teamspeak-group-id">{{ trans('teamspeak::ts.groups') }}</label>
-                        <select name="teamspeak-group-id" id="teamspeak-group-id" class="col-md-12">
+                        <select name="teamspeak-group-id" id="teamspeak-group-id" class="col-md-12" style="width: 100%">
                             @foreach($groups as $group)
                                 <option value="{{ $group->id }}">{{ $group->name }}</option>
                             @endforeach
@@ -83,7 +86,6 @@
             </form>
         </div>
     </div>
-
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">{{ trans('teamspeak::ts.authorisations') }}</h3>

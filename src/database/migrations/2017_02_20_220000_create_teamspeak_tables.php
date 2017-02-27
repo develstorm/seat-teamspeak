@@ -17,6 +17,7 @@ class CreateTeamspeakTables extends Migration
             $table->string('id');
             $table->string('name');
             $table->boolean('is_server_group')->default(true);
+            $table->unsignedInteger('main_group')->default(0);
             $table->timestamps();
 
             $table->primary('id');

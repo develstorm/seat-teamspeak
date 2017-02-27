@@ -33,6 +33,7 @@ return [
     'username' => 'Username',
     'groups' => 'Server Groups',
     'add' => 'Add',
+    'save' => 'Save',
     'authorisations' => 'Authorisations',
     'user_filter' => 'User Filter',
     'role_filter' => 'Role Filter',
@@ -47,7 +48,15 @@ return [
     'alliance' => 'Alliance',
     'remove' => 'Remove',
     'enabled' => 'Enabled',
-    'settings' => 'Teamspeak Settings'
+    'settings' => 'Teamspeak Settings',
+
+    'defaults' => [
+        '1'=> 'Unverified',
+        '2'=> 'Alliance Blue',
+        '3'=> 'Coalition',
+        '4'=> 'Alliance Member',
+        '5'=> 'Administrator',
+    ],
 
 ];
 

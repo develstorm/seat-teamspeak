@@ -84,6 +84,16 @@ Route::group([
                 'as'   => 'teamspeak.register.save',
                 'uses' => 'RegisterController@saveUID',
             ]);
+            Route::get('/groups', [
+                'as' => 'teamspeak.groups',
+                'uses' =>'GroupsController@getList',
+                'middleware' => 'bouncer:teamspeak.config'
+            ]);
+            Route::post('/groups', [
+                'as' => 'teamspeak.defaults.post',
+                'uses' =>'GroupsController@postDefaults',
+                'middleware' => 'bouncer:teamspeak.config'
+            ]);
 
 
 

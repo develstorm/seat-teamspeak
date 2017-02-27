@@ -26,18 +26,23 @@ class TeamspeakAssKicker extends AbstractTeamspeak
             //$groups = $this->getTeamspeak()->clientGetServerGroupsByDbid($userInfo->client_database_id);
             $teamspeakGroups = $this->getTeamspeak()->clientGetServerGroupsByDbid($teamspeakUser->teamspeak_id);
 
+            // Compare with Protected/Ignored Server Groups (Guest etc)
+            //
+            //
+            /////////////////////////////////////////////////////////////
+
+
             $memberOfGroups = [];
             foreach ($teamspeakGroups as $g) {
                     $memberOfGroups[] = $g['sgid'];
             }
-
             // if key are not valid OR account no longer paid
             // kick the user from all channels to which he's member
             if ($this->isEnabledKey($keys) == false || $this->isActive($keys) == false) {
+                if (!empty($teamspeakGroups)) {
+                    $this->processGroupsKick($userInfo, $memberOfGroups);
+                    $this->logEvent('kick', $teamspeakGroups);
 
-                if (!empty($groups)) {
-                    $this->processGroupsKick($userInfo, $groups);
-                    $this->logEvent('kick', $groups);
                 }
 
                 return;
@@ -66,10 +71,13 @@ class TeamspeakAssKicker extends AbstractTeamspeak
      * @param $groups
      * @throws \ZeroServer\Teamspeak\Exceptions\TeamspeakServerGroupException
      */
-    private function processGroupsKick(\TSFramework_Node_CLient $teamspeakClientNode, $groups)
+    private function processGroupsKick($teamspeakClientNode, $groups)
     {
+        $this->logEvent('status', 'Groups:' . serialize($groups));
         foreach ($groups as $groupId) {
-                $this->getTeamspeak()->serverGroupClientDel($groupId, $teamspeakClientNode->teamspeak_id);
+            if($groupId != 8) {
+                $this->getTeamspeak()->serverGroupClientDel($groupId, $teamspeakClientNode->client_database_id);
+            }
         }
     }
 

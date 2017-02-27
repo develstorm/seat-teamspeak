@@ -179,7 +179,10 @@ abstract class AbstractTeamspeak
                 break;
             case 'kick':
                 $message = 'The user ' . $this->user->name . ' has been kicked from following groups : ' .
-                    implode(',', $groups);
+                    serialize($groups);
+                break;
+            case 'status':
+                $message = 'Status: '. $groups;
                 break;
         }
 

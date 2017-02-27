@@ -55,7 +55,5 @@ class TeamspeakGroupsUpdate extends Command
                 'name' => $group->name
             ]);
         }
-        //foreach (TeamspeakGroup::get('teamspeak_groups'))
-
     }
 }

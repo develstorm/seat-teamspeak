@@ -8,6 +8,13 @@ return [
         'highlight_view' => 'list',
         'route' => 'teamspeak.list',
     ],
+    'groups'=> [
+        'name' => 'Server Groups',
+        'icon' => 'fa-cubes',
+        'permission' => 'teamspeak.config',
+        'highlight_view' => 'groups',
+        'route' => 'teamspeak.groups',
+    ],
     'configuration' => [
         'name'  => 'Settings',
         'icon'  => 'fa-cogs',

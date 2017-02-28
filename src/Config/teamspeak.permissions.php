@@ -21,78 +21,91 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 return [
 
-    'superuser',
-    'queue_manager',
-
-    'apikey' => [
-        'delete',
-        'detail',
-        'toggle_status',
-        'list',
-        'update'
-    ],
-
-    'character' => [
-        'assets',
-        'bookmarks',
-        'calendar',
-        'channels',
-        'contacts',
-        'contracts',
-        'industry',
-        'intel',
-        'killmails',
-        'list',
-        'mail',
-        'market',
-        'notifications',
-        'pi',
-        'research',
-        'skills',
-        'standings',
-        'sheet',
-        'journal',
-        'transactions',
-    ],
-
-    'corporation' => [
-        'assets',
-        'bookmarks',
-        'contracts',
-        'industry',
-        'killmails',
-        'ledger',
-        'list_all',
-        'market',
-        'security',
-        'standings',
-        'tracking',
-        'pocos',
-        'starbases',
-        'summary',
-        'journal',
-        'transactions',
-    ],
-
-    'mail' => [
-        'bodies',
-        'subjects'
-    ],
-
-    'people' => [
+    'teamspeak' => [
+        'info',
+        'register',
+        'config',
         'create',
-        'edit',
-        'view'
+        'view',
     ],
-
-    'search' => [
-        'character_assets',
-        'character_contact_lists',
-        'character_mail',
-        'characters',
-        'character_skills',
-        'character_standings',
-        'corporation_assets',
-        'corporation_standings',
+    'tsserver' => [
+        'admin',
+        'operator',
+        'fleet',
     ]
+
+//    'superuser',
+//    'queue_manager',
+//
+//    'apikey' => [
+//        'delete',
+//        'detail',
+//        'toggle_status',
+//        'list',
+//        'update'
+//    ],
+//
+//    'character' => [
+//        'assets',
+//        'bookmarks',
+//        'calendar',
+//        'channels',
+//        'contacts',
+//        'contracts',
+//        'industry',
+//        'intel',
+//        'killmails',
+//        'list',
+//        'mail',
+//        'market',
+//        'notifications',
+//        'pi',
+//        'research',
+//        'skills',
+//        'standings',
+//        'sheet',
+//        'journal',
+//        'transactions',
+//    ],
+//
+//    'corporation' => [
+//        'assets',
+//        'bookmarks',
+//        'contracts',
+//        'industry',
+//        'killmails',
+//        'ledger',
+//        'list_all',
+//        'market',
+//        'security',
+//        'standings',
+//        'tracking',
+//        'pocos',
+//        'starbases',
+//        'summary',
+//        'journal',
+//        'transactions',
+//    ],
+//
+//    'mail' => [
+//        'bodies',
+//        'subjects'
+//    ],
+//
+//    'people' => [
+//        'create',
+//        'edit',
+//        'view'
+//    ],
+//
+//    'search' => [
+//        'character_assets',
+//        'character_contact_lists',
+//        'character_mail',
+//        'characters',
+//        'character_skills',
+//        'character_standings',
+//        'corporation_assets',
+//        'corporation_standings',
+//    ]
 ];

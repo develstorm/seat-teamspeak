@@ -1,0 +1,90 @@
+<?php
+
+/*
+ * This file is part of SeAT
+ *
+ * Copyright (C) 2015, 2016, 2017  Leon Jacobs
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
+namespace Zeroserver\Teamspeak\Http\Composers;
+
+use Illuminate\Contracts\View\View;
+use Seat\Web\Http\Composers\AbstractMenu;
+
+/**
+ * Class CharacterMenu.
+ * @package Seat\Web\Http\Composers
+ */
+class ConfigMenu extends AbstractMenu
+{
+    /**
+     * Create a new sidebar composer.
+     */
+    public function __construct()
+    {
+
+    }
+
+    /**
+     * Return required keys in menu structure.
+     *
+     * @return array
+     */
+    public function getRequiredKeys(): array
+    {
+
+        return [
+            'name', 'permission', 'highlight_view', 'route',
+        ];
+    }
+
+    /**
+     * Bind data to the view.
+     *
+     * @param  View $view
+     *
+     * @return void
+     */
+    public function compose(View $view)
+    {
+
+        // This menu item declares the menu and
+        // sets it as an array of arrays.
+        $menu = [];
+
+        // Load any package menus
+        if (! empty(config('package.admin.menu'))) {
+
+            foreach (config('package.admin.menu') as $menu_data) {
+
+                $prepared_menu = $this->load_plugin_menu('teamspeak', $menu_data);
+                array_push($menu, $prepared_menu);
+
+            }
+        }
+
+        // Sort the menu alphabetically.
+//        $menu = array_values(array_sort($menu, function ($value) {
+//
+//            return $value['name'];
+//
+//        }));
+
+        $view->with('menu', $menu);
+    }
+
+}

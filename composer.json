@@ -1,17 +1,19 @@
 {
 
+<<<<<<< HEAD
     "name": "eveseat/teamspeak",
+=======
+    "name": "zeroserver/teamspeak",
+>>>>>>> e9f58948438002598dc3319caa46aca3150c5edc
     "description": "EVE SeAT Teamspeak Integration",
     "type": "service",
     "require": {
-        "eveseat/seat": "^2.0",
-        "eveseat/services": "^2.0",
-        "eveseat/web": "^2.0"
-    },
-    "require-dev": {
-        "eveseat/seat": "^2.0",
-        "eveseat/services": "^2.0"
-    },
+        "eveseat/web": "^2.0",
+        "illuminate/support": "~5.0",
+	    "theomessin/ts-framework": "~1.1",
+        "erusev/parsedown": "^1.6",
+        "planetteamspeak/ts3-php-framework": "^1.1"
+	},
     "authors": [
         {
             "name": "SauerRam",
@@ -20,6 +22,7 @@
     ],
     "autoload": {
         "psr-4": {
+<<<<<<< HEAD
             "Vendor\\Name\\": "src/"
         }
     },
@@ -32,6 +35,10 @@
     },
     "require-dev": {
         "phpunit/phpunit": "~5.0"
+=======
+            "ZeroServer\\Teamspeak\\": "src/"
+        }
+>>>>>>> e9f58948438002598dc3319caa46aca3150c5edc
     }
 
 }

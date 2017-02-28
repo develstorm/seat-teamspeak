@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 /*
 This file is part of SeAT
@@ -24,3 +25,11 @@ return [
     'version'                  => '0.1',
 
 ];
+=======
+<?php
+
+return [
+
+    'version'                  => '2.0',
+];
+>>>>>>> e9f58948438002598dc3319caa46aca3150c5edc

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class TeamspeakGroup extends Model
 {
     protected $fillable = [
-        'id', 'name', 'is_server_group', 'main_group'
+        'id', 'name', 'is_server_group', 'type'
     ];
 
     protected $primaryKey = 'id';

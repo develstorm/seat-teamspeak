@@ -17,11 +17,7 @@ class ValidateGroup extends FormRequest
     public function rules()
     {
         return [
-            'defaults-1' => 'required|integer',
-            'defaults-2' => 'required|integer',
-            'defaults-3' => 'required|integer',
-            'defaults-4' => 'required|integer',
-            'defaults-5' => 'required|integer'
+            'corp-template' => 'required|integer',
         ];
     }
 }

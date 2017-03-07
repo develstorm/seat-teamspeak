@@ -55,5 +55,24 @@ class TeamspeakGroupsUpdate extends Command
                 'name' => $group->name
             ]);
         }
+        $tgroups = $tsServer->serverGroupList(['type' => 0]);
+
+        foreach ($tgroups as $group) {
+            $teamspeakGroup = TeamspeakGroup::find($group->sgid);
+
+            if ($teamspeakGroup == null) {
+                TeamspeakGroup::create([
+                    'id' => $group->sgid,
+                    'name' => $group->name,
+                    'is_server_group' => false,
+                    'type' => 1,
+                ]);
+
+                continue;
+            }
+            $teamspeakGroup->update([
+                'name' => $group->name
+            ]);
+        }
     }
 }

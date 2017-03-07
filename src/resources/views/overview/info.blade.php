@@ -42,7 +42,8 @@
         <div class="box-body">
           Online Time<br>
           Average Users<br>
-          Traffic
+          Traffic<br>
+          Storm
         </div>
       </div>
       <div class="box box-info">

@@ -18,40 +18,73 @@ use ZeroServer\Teamspeak\Validation\AddRelation;
 use ZeroServer\Teamspeak\Validation\ValidateGroup;
 use Seat\Web\Models\Acl\Role;
 use Seat\Web\Models\User;
+use Seat\Eveapi\Models\Eve\AllianceListMemberCorporations;
 
 class GroupsController extends Controller
 {
     public function getList()
     {
         $groups = TeamspeakGroup::all();
+        $template = Seat::get('teamspeak_corp_template');
+        $aid = '99003995';
+        $allianceCorps = AllianceListMemberCorporations::where('allianceID', '=', $aid)->get();
 
-        return view('teamspeak::admin.partials.groups', compact('groups'));
+        return view('teamspeak::admin.partials.groups', compact('groups', 'allianceCorps', 'template'));
     }
-    public function postDefaults(ValidateGroup $request){
 
-        for($i=1; $i <6; $i++) {
-
-            $old = TeamspeakGroup::where('main_group', '=', $i)->first();
-            if(isset($old)){
-                $old->main_group = '0';
-                $old->save();
-            }
-
-            $new = TeamspeakGroup::where('id', '=', $request->input('defaults-' . $i))->first();
-            $new->main_group = $i;
-            $new->save();
-        }
-
-//        set('main_group', 1)
-//            ->where($request->input('default-1'));
-//        Seat::set('teamspeak_password', $request->input('teamspeak_password'));
-//        Seat::set('teamspeak_hostname', $request->input('teamspeak_hostname'));
-//        Seat::set('teamspeak_server_query', $request->input('teamspeak_query'));
-//        Seat::set('teamspeak_server_port', $request->input('teamspeak_port'));
-
+    public function enableGroup($groupID){
+        
+        $teamspeakGroup = TeamspeakGroup::find($groupID);
+        $teamspeakGroup->update([
+            'is_server_group' => 1
+        ]);
         return redirect()->back()
-            ->with('success', 'Default Groups have been updated');
+            ->with('success', 'Group Enabled');
+        
     }
+    public function disableGroup($groupID){
+
+        $teamspeakGroup = TeamspeakGroup::find($groupID);
+        $teamspeakGroup->update([
+            'is_server_group' => 0
+        ]);
+        return redirect()->back()
+            ->with('success', 'Group Disabled');
+
+    }
+    public function postTemplate(ValidateGroup $request){
+
+        Seat::set('teamspeak_corp_template', $request->input('corp-template'));
+        return redirect()->back()
+            ->with('success', 'Template Group Set');
+    }
+    
+    
+    
+    
+    
+    public function createServerGroup(){
+
+    }
+    public function deleteServerGroup(){
+
+    }
+    public function createSpecialGroup(){
+
+    }
+    public function deleteSpecialGroup(){
+
+    }
+    public function createCorpGroup(){
+
+    }
+    public function deleteCorpGroup(){
+
+    }
+    public function roleToggleSync(){
+
+    }
+
 
 
 

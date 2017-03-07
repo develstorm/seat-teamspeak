@@ -14,146 +14,79 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>ServerGroup</th>
-                        <th>Main Group</th>
                         <th>Functions</th>
                     </tr>
                     @foreach($groups as $group)
+                        @if($group['type'] === 0)
                     <tr>
                         <td>{{$group['id']}}</td>
                         <td>{{$group['name']}}</td>
-                        <td>{{$group['is_server_group']}}</td>
-                        <td>{{$group['main_group']}}</td>
-                        <td>Options</td>
+                        <td>
+                            @if($group['is_server_group'])
+                                <i class="fa fa-check" style="color:green" aria-hidden="true"></i>
+                            @else
+                                <i class="fa fa-close" style="color:red" aria-hidden="true"></i>
+                            @endif
+                        </td>
+                        <td>
+                            @if($group['is_server_group'])
+                                <a href="{{ route('teamspeak.groups.disable', ['group_id' => $group['id']]) }}" >
+                                    <i class="fa fa-toggle-on fa-2x" aria-hidden="true"></i>
+                                </a>
+                            @else
+                                <a href="{{ route('teamspeak.groups.enable', ['group_id' => $group['id']]) }}" >
+                                    <i class="fa fa-toggle-off fa-2x" aria-hidden="true"></i>
+                                </a>
+                            @endif
+                        </td>
                      </tr>
+                        @endif
                     @endforeach
                 </table>
 
             </div>
             <div class="panel-footer clearfix">
-                Button
+                <i class="fa fa-check" aria-hidden="true"></i> = Active
+                <i class="fa fa-close" aria-hidden="true"></i> = Ignored
+
             </div>
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Default Groups</h3>
+                <h3 class="panel-title">Template Groups Settings</h3>
             </div>
             <div class="panel-body">
 
-                <form role="form" action="{{ route('teamspeak.defaults.post') }}" method="post">
                     {{ csrf_field() }}
-
+                <form role="form" action="{{ route('teamspeak.corp.default') }}" method="post">
                     <div class="box-body" >
+                            {{ csrf_field() }}
 
-                        <div class="form-group">
-                            <label for="defaults-1">{{ trans('teamspeak::ts.defaults.1') }}</label>
-                            <select name="defaults-1" id="defaults-1" class="col-md-12" style="width: 100%" required>
-                                @foreach($groups as $group)
-                                    @if($group->main_group == '1')
-                                        <option selected value="{{ $group->id }}">{{ $group->name }}</option>
-                                    @else
-                                        <option value="{{ $group->id }}">{{ $group->name }}</option>
-                                    @endif
-                                    @if($group->main_group == '1')
-                                        {{ $set = 1 }}
-                                    @endif
-                                @endforeach
-                                @if(!$set)
-                                        <option selected hidden value="0">- Not Sellected</option>
-                                @endif
-                            </select>
-                        </div>
-
-                         <div class="form-group">
-                            <label for="defaults-2">{{ trans('teamspeak::ts.defaults.2') }}</label>
-                            <select name="defaults-2" id="defaults-2" class="col-md-12" style="width: 100%" required>
-                                {{ $set = 0 }}
-                                @foreach($groups as $group)
-                                    @if($group->main_group == '2')
-                                        <option selected value="{{ $group->id }}">{{ $group->name }}</option>
-                                    @else
-                                        <option value="{{ $group->id }}">{{ $group->name }}</option>
-                                    @endif
-                                        @if($group->main_group == '2')
-                                            {{ $set = 1 }}
-                                        @endif
-                                @endforeach
-                                @if(!$set)
-                                    <option selected hidden value="0">- Not Sellected</option>
-                                @endif
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="defaults-3">{{ trans('teamspeak::ts.defaults.3') }}</label>
-                            <select name="defaults-3" id="defaults-3" class="col-md-12" style="width: 100%" required>
-                                {{ $set = 0 }}
-                                @foreach($groups as $group)
-                                    @if($group->main_group == '3')
-                                        <option selected value="{{ $group->id }}">{{ $group->name }}</option>
-                                    @else
-                                        <option value="{{ $group->id }}">{{ $group->name }}</option>
-                                    @endif
-                                    @if($group->main_group == '3')
-                                        {{ $set = 1 }}
-                                    @endif
-                                @endforeach
-                                @if(!$set)
-                                    <option selected hidden value="0">- Not Sellected</option>
-                                @endif
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="defaults-4">{{ trans('teamspeak::ts.defaults.4') }}</label>
-                            <select name="defaults-4" id="defaults-4" class="col-md-12" style="width: 100%" required>
-                                {{ $set = 0 }}
-                                @foreach($groups as $group)
-                                    @if($group->main_group == '4')
-                                        <option selected value="{{ $group->id }}">{{ $group->name }}</option>
-                                    @else
-                                        <option value="{{ $group->id }}">{{ $group->name }}</option>
-                                    @endif
-                                    @if($group->main_group == '4')
-                                        {{ $set = 1 }}
-                                    @endif
-                                @endforeach
-                                @if(!$set)
-                                    <option selected hidden value="0">- Not Sellected</option>
-                                @endif
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="defaults-5">{{ trans('teamspeak::ts.defaults.5') }}</label>
-                            <select name="defaults-5" id="defaults-5" class="col-md-12" style="width: 100%" required>
-                                {{ $set = 0 }}
-                                @foreach($groups as $group)
-                                    @if($group->main_group == '5')
-                                        <option selected value="{{ $group->id }}">{{ $group->name }}</option>
-                                    @else
-                                        <option value="{{ $group->id }}">{{ $group->name }}</option>
-                                    @endif
-                                    @if($group->main_group == '5')
-                                        {{ $set = 1 }}
-                                    @endif
-                                @endforeach
-                                @if(!$set)
-                                    <option selected hidden value="0">- Not Sellected</option>
-                                @endif
-                            </select>
-                        </div>
-
-
+                            <div class="box-body" >
+                                <div class="form-group">
+                                    <label for="corp-template"> Corporation Template Group:</label>
+                                    <select name="corp-template" id="corp-template" class="col-md-12" style="width: 100%">
+                                        @foreach($groups as $group)
+                                            @if($group['type'] === 1)
+                                                @if($group['id'] == $template)
+                                                    <option selected value="{{ $group['id'] }}">{{ $group['name'] }}</option>
+                                                @else
+                                                    <option value="{{ $group['id'] }}">{{ $group['name'] }}</option>
+                                                @endif
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        <button type="submit" class="btn btn-primary pull-right">{{ trans('teamspeak::ts.save') }}</button>
                     </div>
                 </form>
-            </div>
-            <div class="panel-footer clearfix">
-                <button type="submit" class="btn btn-primary pull-right">{{ trans('teamspeak::ts.save') }}</button>
+
             </div>
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Special Groups</h3>
+                <h3 class="panel-title">Corporation Groups</h3>
             </div>
             <div class="panel-body">
 
@@ -165,12 +98,31 @@
                         <th>Functions</th>
                     </tr>
                     @foreach($groups as $group)
+                        @if($group['type'] == '1')
                         <tr>
                             <td>{{$group['id']}}</td>
                             <td>{{$group['name']}}</td>
-                            <td>{{$group['is_server_group']}}</td>
-                            <td>Options</td>
+                            <td>
+                                @if($group['is_server_group'])
+                                    <i class="fa fa-check" style="color:green" aria-hidden="true"></i>
+                                @else
+                                    <i class="fa fa-close" style="color:red" aria-hidden="true"></i>
+                                @endif
+                            </td>
+                            <td>
+                                @if($group['is_server_group'])
+                                    <a href="{{ route('teamspeak.groups.disable', ['group_id' => $group['id']]) }}" >
+                                        <i class="fa fa-toggle-on fa-2x" aria-hidden="true"></i>
+                                    </a>
+                                @else
+                                    <a href="{{ route('teamspeak.groups.enable', ['group_id' => $group['id']]) }}" >
+                                        <i class="fa fa-toggle-off fa-2x" aria-hidden="true"></i>
+                                    </a>
+                                @endif
+                                    <i class="fa fa-close fa-2x" style="color:red" aria-hidden="true"></i>
+                            </td>
                         </tr>
+                        @endif
                     @endforeach
                 </table>
 
@@ -199,7 +151,10 @@
 
             </div>
             <div class="panel-footer clearfix">
-                Button
+                @foreach($allianceCorps as $corp)
+
+                    {{$corp['corporationID']}}
+                @endforeach
             </div>
         </div>
 

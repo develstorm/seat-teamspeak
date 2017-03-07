@@ -90,8 +90,18 @@ Route::group([
                 'middleware' => 'bouncer:teamspeak.config'
             ]);
             Route::post('/groups', [
-                'as' => 'teamspeak.defaults.post',
-                'uses' =>'GroupsController@postDefaults',
+                'as'    => 'teamspeak.corp.default',
+                'uses'  => 'GroupsController@postTemplate',
+                'middleware'    => 'bouncer:teamspeak.config'
+            ]);
+            Route::get('/groups/{gid}/enable', [
+                'as' =>'teamspeak.groups.enable',
+                'uses' =>'GroupsController@enableGroup',
+                'middleware' => 'bouncer:teamspeak.config'
+            ]);
+            Route::get('/groups/{gid}/disable', [
+                'as' =>'teamspeak.groups.disable',
+                'uses' =>'GroupsController@disableGroup',
                 'middleware' => 'bouncer:teamspeak.config'
             ]);
 

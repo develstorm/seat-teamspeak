@@ -4,6 +4,7 @@ namespace ZeroServer\Teamspeak\Jobs;
 
 use Seat\Eveapi\Models\Eve\ApiKey;
 use ZeroServer\Teamspeak\Models\TeamspeakUser;
+use ZeroServer\Teamspeak\Models\TeamspeakGroup;
 //use TSFramework\Node\Client;
 
 class TeamspeakAssKicker extends AbstractTeamspeak
@@ -23,24 +24,22 @@ class TeamspeakAssKicker extends AbstractTeamspeak
         if ($teamspeakUser != null) {
             // get channels into which current user is already member
             $userInfo = $this->getTeamspeak()->clientGetByDbid($teamspeakUser->teamspeak_id, true);
-            //$groups = $this->getTeamspeak()->clientGetServerGroupsByDbid($userInfo->client_database_id);
             $teamspeakGroups = $this->getTeamspeak()->clientGetServerGroupsByDbid($teamspeakUser->teamspeak_id);
-
-            // Compare with Protected/Ignored Server Groups (Guest etc)
-            //
-            //
-            /////////////////////////////////////////////////////////////
-
 
             $memberOfGroups = [];
             foreach ($teamspeakGroups as $g) {
                     $memberOfGroups[] = $g['sgid'];
             }
+
+            // Filter Ignored Groups
+            $ignoredGroups = TeamspeakGroup::where('is_server_group', '0')
+                ->get();
+            $processGroups = array_diff($memberOfGroups, $ignoredGroups);
             // if key are not valid OR account no longer paid
             // kick the user from all channels to which he's member
             if ($this->isEnabledKey($keys) == false || $this->isActive($keys) == false) {
                 if (!empty($teamspeakGroups)) {
-                    $this->processGroupsKick($userInfo, $memberOfGroups);
+                    $this->processGroupsKick($userInfo, $processGroups);
                     $this->logEvent('kick', $teamspeakGroups);
 
                 }
@@ -52,11 +51,12 @@ class TeamspeakAssKicker extends AbstractTeamspeak
             // to channel from which he's no longer granted to be in
             $allowedGroups = $this->allowedGroups($teamspeakUser, true);
             $extraGroups = array_diff($memberOfGroups, $allowedGroups);
+            $processGroups = array_diff($extraGroups, $ignoredGroups);
 
             // remove granted channels from channels in which user is already in and kick him
-            if (!empty($extraGroups)) {
-                $this->logEvent('kick', $extraGroups);
-                $this->processGroupsKick($userInfo, $extraGroups);
+            if (!empty($processGroups)) {
+                $this->logEvent('kick', $processGroups);
+                $this->processGroupsKick($userInfo, $processGroups);
 
             }
         }
